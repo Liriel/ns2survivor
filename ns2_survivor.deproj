@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <file>
+    <filename>source\lua\HelloUnknownWorld.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_AlienTeam.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_Client.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_GameRules.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_MapBlip.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_MarineTeam.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_NetworkMessages_Client.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_Player_Client.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_Player_Server.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_Predict.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_Server.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_Shared.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_Utility.lua</filename>
+  </file>
+</project>

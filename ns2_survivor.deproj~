@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <file>
+	  <filename>source/lua/HelloUnknownWorld.lua</filename>
+  </file>
+  <file>
+    <filename>Survivor_Client.lua</filename>
+  </file>
+  <file>
+    <filename>Survivor_Predict.lua</filename>
+  </file>
+  <file>
+    <filename>Survivor_Server.lua</filename>
+  </file>
+  <file>
+    <filename>Survivor_Shared.lua</filename>
+  </file>
+</project>
