@@ -21,6 +21,7 @@ if (Server) then
     function NS2Gamerules:ResetGame()
         // Disable auto team balance
         Server.SetConfigSetting("auto_team_balance", nil)
+        Print "ResetGame called"
        
         ns2ResetGame(self)
     end

@@ -28,6 +28,9 @@
     <filename>source\lua\Survivor_Player_Server.lua</filename>
   </file>
   <file>
+    <filename>source\lua\Survivor_PlayingTeam.lua</filename>
+  </file>
+  <file>
     <filename>source\lua\Survivor_Predict.lua</filename>
   </file>
   <file>

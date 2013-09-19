@@ -4,6 +4,8 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
+Script.Load("lua/Survivor_PlayingTeam.lua")
+
 //don't spwan initail structures at game start
 function MarineTeam:SpawnInitialStructures(techPoint) 
     return nil, nil 
