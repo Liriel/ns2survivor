@@ -4,7 +4,14 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
-Script.Load("lua/Survivor_PlayingTeam.lua")
+local resourcePointRandomizer = Randomizer()
+
+local ns2MarineTeamInitialize = MarineTeam.Initialize
+function MarineTeam:Initialize(teamName, teamNumber)
+    //initialize the randomizer
+    resourcePointRandomizer:randomseed(Shared.GetSystemTime())    
+    ns2MarineTeamInitialize(self, teamName, teamNumber)
+end
 
 //don't spwan initail structures at game start
 function MarineTeam:SpawnInitialStructures(techPoint) 
@@ -57,3 +64,22 @@ function MarineTeam:Update(timePassed)
     
 end
 
+//TODO: change to power nodes
+function MarineTeam:RespawnPlayer(player, origin, angles)
+    local success = false
+    local rps = GetAvailableResourcePoints()
+    
+    if origin ~= nil and angles ~= nil then
+        success = Team.RespawnPlayer(self, player, origin, angles)
+    elseif (table.count(rps) > 0) then
+        
+        
+        local selectedSpawn = resourcePointRandomizer:random(1, #rps)
+        local spawnOrigin = Vector(rps[selectedSpawn]:GetOrigin())
+        success = Team.RespawnPlayer(self, player, spawnOrigin, player:GetAngles())
+    else
+        Print("MarineTeam:RespawnPlayer(): No resource points found.")
+    end
+    
+    return success
+end
