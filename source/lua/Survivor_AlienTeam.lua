@@ -26,7 +26,7 @@ local function respawnNow(queuedPlayer)
         //local msg = "Techpoints found: %d"
         //msg = string.format(msg, table.count(tps))
         //Print (msg)
-        local spawnOrigin = Vector(rps[selectedSpawn]:GetOrigin())
+        local spawnOrigin = Vector(rps[selectedSpawn]:GetOrigin()) + Vector(0.01, 0.2, 0)
         local team = queuedPlayer:GetTeam()
         local success, player = team:ReplaceRespawnPlayer(queuedPlayer, spawnOrigin, queuedPlayer:GetAngles()) 
         //local success, player = team:ReplaceRespawnPlayer(queuedPlayer, nil, nil) 
@@ -61,11 +61,13 @@ function AlienTeam:Update(timePassed)
     
     local shellLevel = GetShellLevel(self:GetTeamNumber())  
     for index, alien in ipairs(GetEntitiesForTeam("Alien", self:GetTeamNumber())) do
-        if not(alien:GetIsAlive()) then
-            respawnNow(alien)
-        end
         alien:UpdateArmorAmount(shellLevel)
         alien:UpdateHealthAmount(math.min(12, self.bioMassLevel), self.maxBioMassLevel)
+    end
+    
+    for index, queuedPlayer in ipairs(self:GetSortedRespawnQueue()) do
+        self:RemovePlayerFromRespawnQueue(queuedPlayer)
+        respawnNow(queuedPlayer)
     end
     
     //UpdateCystConstruction(self, timePassed)

@@ -72,10 +72,9 @@ function MarineTeam:RespawnPlayer(player, origin, angles)
     if origin ~= nil and angles ~= nil then
         success = Team.RespawnPlayer(self, player, origin, angles)
     elseif (table.count(rps) > 0) then
-        
-        
+    
         local selectedSpawn = resourcePointRandomizer:random(1, #rps)
-        local spawnOrigin = Vector(rps[selectedSpawn]:GetOrigin())
+        local spawnOrigin = rps[selectedSpawn]:GetOrigin() + Vector(0.01, 0.2, 0)
         success = Team.RespawnPlayer(self, player, spawnOrigin, player:GetAngles())
     else
         Print("MarineTeam:RespawnPlayer(): No resource points found.")
