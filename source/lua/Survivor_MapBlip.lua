@@ -14,7 +14,7 @@ function MapBlip:UpdateRelevancy()
         mask = bit.bor(mask, kRelevantToTeam2)
     else    
     
-        if (self.mapBlipTeam == kTeam1Index and surviviorGamePhase ~= 1) or self.mapBlipTeam == kTeamInvalid or self:GetIsSighted() then
+        if (self.mapBlipTeam == kTeam1Index and surviviorGamePhase ~= kSurvivorGamePhase.FragYourNeighbor) or self.mapBlipTeam == kTeamInvalid or self:GetIsSighted() then
             mask = bit.bor(mask, kRelevantToTeam1)
         end
         if self.mapBlipTeam == kTeam2Index or self.mapBlipTeam == kTeamInvalid or self:GetIsSighted() then

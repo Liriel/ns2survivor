@@ -4,6 +4,7 @@
 //
 Script.Load("lua/HelloUnknownWorld.lua")
 
+Script.Load("lua/Survivor_Globals.lua")
 Script.Load("lua/Survivor_Gamerules.lua")
 Script.Load("lua/Survivor_MapBlip.lua")
 //not used right now:

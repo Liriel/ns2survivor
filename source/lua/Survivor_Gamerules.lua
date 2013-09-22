@@ -4,17 +4,14 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
-//phase 0 = game not started
-//phase 1 = frag your neighbor
-//phase 2 = survivor
-surviviorGamePhase = 0
+surviviorGamePhase = kSurvivorGamePhase.NotStarted
 //gHUDMapEnabled = false
 
 if (Server) then
     //if the survivor pahse of the the game has started already players have to wait 
     //until a new round begins
     function NS2Gamerules:GetCanJoinTeamNumber(teamNumber)      
-        return ((teamNumber == 1) and (surviviorGamePhase < 2))
+        return ((teamNumber == 1) and (surviviorGamePhase ~= kSurvivorGamePhase.Survival))
     end
 
     local ns2ResetGame = NS2Gamerules.ResetGame
@@ -28,13 +25,13 @@ if (Server) then
         
     //looks like this funciton is never called...
     function NS2Gamerules:GetFriendlyFire() 
-        Print (string.format("NS2 Check FF called (GamePahse = %d)",surviviorGamePhase))
-        return (surviviorGamePhase == 1)
+        Print (string.format("NS2 Check FF called (GamePahse = %s)",surviviorGamePhase))
+        return (surviviorGamePhase == kSurvivorGamePhase.FragYourNeighbor)
     end
     
     //friendly fire is enabled in the frag your neighbor pahse of the game
     function GetFriendlyFire() 
-        return (surviviorGamePhase == 1)
+        return (surviviorGamePhase == kSurvivorGamePhase.FragYourNeighbor)
     end
     
     local ns2OnEntityKilled = NS2Gamerules.OnEntityKilled
@@ -48,16 +45,25 @@ if (Server) then
             if (targetEntity:GetTeamNumber() == 1) then
                 //If the marine was the first one to get killed goto phase two:Survive!
                 //this disables friendly fire
-                if (surviviorGamePhase == 1) then
+                if (surviviorGamePhase == kSurvivorGamePhase.FragYourNeighbor) then
                     //move on to normal game (phase 2)
-                    surviviorGamePhase = 2
-                    Print "Game phase 2 has started"
+                    SetSurvivorGamePhase(kSurvivorGamePhase.Survival)
+                    
+                    //turn off the lights
+                    for index, entity in ientitylist(Shared.GetEntitiesWithClassname("PowerPoint")) do
+                        entity:SetLightMode(kLightMode.NoPower)
+                    end 
                 end
             
                 //move player to alien team
                 success, newEntity = NS2Gamerules.JoinTeam(self, targetEntity, 2)
             end
         end
+    end
+    
+    function SetSurvivorGamePhase(gamePhase)
+        Print (string.format("Game phase %s has started", kSurvivorGamePhase))
+        surviviorGamePhase = gamePhase
     end
     
     // start the game as soon as all players have joined marines
@@ -79,9 +85,8 @@ if (Server) then
         //start the game already!
         if self:GetGameState() == kGameState.NotStarted then
             self:SetGameState(kGameState.PreGame)
-            surviviorGamePhase = 1
+            SetSurvivorGamePhase(kSurvivorGamePhase.FragYourNeighbor)
             showMarinesOnMap(self.team1, false)
-            Print (string.format("Game phase %d has started",surviviorGamePhase))
         end
     end
     
@@ -94,7 +99,7 @@ if (Server) then
                 local team2Players = self.team2:GetNumPlayers()
                 
                 if (team1Players == 0) then
-                    surviviorGamePhase = 0
+                    SetSurvivorGamePhase(kSurvivorGamePhase.NotStarted)
                     self:EndGame(self.team2)
                 end
                 //TODO: check if time is up
