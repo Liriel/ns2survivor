@@ -13,6 +13,9 @@
     <filename>source\lua\Survivor_GameRules.lua</filename>
   </file>
   <file>
+    <filename>source\lua\Survivor_Globals.lua</filename>
+  </file>
+  <file>
     <filename>source\lua\Survivor_MapBlip.lua</filename>
   </file>
   <file>
