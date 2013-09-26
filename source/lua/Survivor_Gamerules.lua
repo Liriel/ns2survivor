@@ -22,12 +22,6 @@ if (Server) then
        
         ns2ResetGame(self)
     end
-        
-    //looks like this funciton is never called...
-    function NS2Gamerules:GetFriendlyFire() 
-        Print (string.format("NS2 Check FF called (GamePahse = %s)",surviviorGamePhase))
-        return (surviviorGamePhase == kSurvivorGamePhase.FragYourNeighbor)
-    end
     
     //friendly fire is enabled in the frag your neighbor pahse of the game
     function GetFriendlyFire() 
@@ -53,6 +47,10 @@ if (Server) then
                     for index, entity in ientitylist(Shared.GetEntitiesWithClassname("PowerPoint")) do
                         entity:SetLightMode(kLightMode.NoPower)
                     end 
+                    
+                    //play power out sound
+                    //self:PlaySound(kDestroyedSound)
+                    //self:PlaySound(kDestroyedPowerDownSound)
                 end
             
                 //move player to alien team
