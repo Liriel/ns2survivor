@@ -43,10 +43,36 @@ if (Server) then
                     //move on to normal game (phase 2)
                     SetSurvivorGamePhase(kSurvivorGamePhase.Survival)
                     
+                    //find all power nodes
+                    local powerPoints = Shared.GetEntitiesWithClassname("PowerPoint")
+                    
+                    //randomly select the one that can be repared
+                    local powerPointRandomizer = Randomizer()
+                    powerPointRandomizer:randomseed(Shared.GetSystemTime()) 
+                    local repairablePowerPointIndex = powerPointRandomizer:random(1,powerPoints:GetSize())
+                    local repairablePowerPoint = powerPoints:GetEntityAtIndex(repairablePowerPointIndex)
+                    
+                    //socket power node
+                    repairablePowerPoint:SetInternalPowerState(PowerPoint.kPowerState.destroyed)
+                    Print(string.format("Repairable PowerPoint is in %s", repairablePowerPoint:GetLocationName()))
+                    
+                    //add event listener
+                    repairablePowerPoint:GetTeam():AddListener("OnConstructionComplete",function(structure)
+                        if(structure == repairablePowerPoint) then
+                            Print "Repairable PowerPoint constructed!"
+                            //turn on the lights
+                            for index, entity in ientitylist(powerPoints) do
+                                if(entity ~= repairablePowerPoint) then
+                                    entity:SetLightMode(kLightMode.Normal)
+                                end
+                            end 
+                        end
+                    end)
+                   
                     //turn off the lights
-                    for index, entity in ientitylist(Shared.GetEntitiesWithClassname("PowerPoint")) do
+                    for index, entity in ientitylist(powerPoints) do
                         entity:SetLightMode(kLightMode.NoPower)
-                    end 
+                    end
                     
                     //play power out sound
                     //self:PlaySound(kDestroyedSound)
@@ -79,8 +105,7 @@ if (Server) then
             */
             return
         end
-        
-        //start the game already!
+                //start the game already!
         if self:GetGameState() == kGameState.NotStarted then
             self:SetGameState(kGameState.PreGame)
             SetSurvivorGamePhase(kSurvivorGamePhase.FragYourNeighbor)
