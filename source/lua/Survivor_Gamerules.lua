@@ -146,7 +146,7 @@ if (Server) then
                 local team2Players = self.team2:GetNumPlayers()
                 
                 if (team1Players == 0) then
-                    SetSurvivorGamePhase(kSurvivorGamePhase.NotStarted)
+                    self:SetSurvivorGamePhase(kSurvivorGamePhase.NotStarted)
                     self:EndGame(self.team2)
                 end
                 //TODO: check if time is up
@@ -166,6 +166,12 @@ if (Server) then
                 player.minimapVisible=false
             end
         end
+    end
+    
+    //unlock the tech tree so we can give upgrades to players 
+    //simply by calling GiveUpgrade
+    function NS2Gamerules:GetAllTech()
+        return true
     end
    
 end

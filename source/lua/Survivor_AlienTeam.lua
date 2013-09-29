@@ -4,19 +4,6 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
-local kBioMassTechIds =
-{
-    kTechId.BioMassOne,
-    kTechId.BioMassTwo,
-    kTechId.BioMassThree,
-    kTechId.BioMassFour,
-    kTechId.BioMassFive,
-    kTechId.BioMassSix,
-    kTechId.BioMassSeven,
-    kTechId.BioMassEight,
-    kTechId.BioMassNine
-}
-
 //don't spwan initail structures at game start
 function AlienTeam:SpawnInitialStructures(techPoint) 
     return nil, nil 
@@ -24,10 +11,6 @@ end
 
 function AlienTeam:GetHasAbilityToRespawn() 
     return true 
-end
-
-function AlienTeam:GetBioMassLevel()
-    return 9
 end
 
 local function respawnNow(queuedPlayer)
@@ -61,7 +44,6 @@ function AlienTeam:Update(timePassed)
     PlayingTeam.Update(self, timePassed)
     
     self:UpdateTeamAutoHeal(timePassed)
-    //self:UnlockTechTree()
     //UpdateEggGeneration(self)
     //UpdateEggCount(self)
     //UpdateAlienSpectators(self)
@@ -81,17 +63,4 @@ function AlienTeam:Update(timePassed)
     
     //UpdateCystConstruction(self, timePassed)
     
-end
-
-function AlienTeam:UnlockTechTree()
-    if self.techTree then
-        local techNode = self.techTree:GetTechNode(kTechId.Leap)
-        if techNode then
-            //Print("tech found")
-            if not(techNode:GetHasTech())then
-                Print("tech enabled")
-                techNode:SetHasTech(true)
-            end
-        end
-    end
 end
