@@ -40,6 +40,9 @@
     <filename>source\lua\Survivor_Skulk_Server.lua</filename>
   </file>
   <file>
+    <filename>source\lua\Survivor_Team.lua</filename>
+  </file>
+  <file>
     <filename>source\lua\Survivor_Utility.lua</filename>
   </file>
 </project>

@@ -43,6 +43,11 @@ if (Server) then
                     //move on to normal game (phase 2)
                     SetSurvivorGamePhase(kSurvivorGamePhase.Survival)
                     
+                    //reset highdamage
+                    self:SetDamageMultiplier(1)
+                    //restore marine health and armor
+                    targetEntity:GetTeam():RestoreTeamHealth()
+                    
                     //find all power nodes
                     local powerPoints = Shared.GetEntitiesWithClassname("PowerPoint")
                     
@@ -110,6 +115,7 @@ if (Server) then
         if self:GetGameState() == kGameState.NotStarted then
             self:SetGameState(kGameState.PreGame)
             SetSurvivorGamePhase(kSurvivorGamePhase.FragYourNeighbor)
+            self:SetDamageMultiplier(100)
             showMarinesOnMap(self.team1, false)
         end
     end
@@ -144,5 +150,7 @@ if (Server) then
             end
         end
     end
+    
+    
     
 end
