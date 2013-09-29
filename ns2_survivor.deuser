@@ -8,4 +8,12 @@
     <local_path></local_path>
     <aux_project_path></aux_project_path>
   </scc>
+  <files>
+    <file>
+      <filename>source\lua\Survivor_GameRules.lua</filename>
+      <breakpoint>
+        <line>83</line>
+      </breakpoint>
+    </file>
+  </files>
 </project>

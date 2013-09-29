@@ -50,10 +50,11 @@ if (Server) then
                     local powerPointRandomizer = Randomizer()
                     powerPointRandomizer:randomseed(Shared.GetSystemTime()) 
                     local repairablePowerPointIndex = powerPointRandomizer:random(1,powerPoints:GetSize())
-                    local repairablePowerPoint = powerPoints:GetEntityAtIndex(repairablePowerPointIndex)
+                    local repairablePowerPoint = powerPoints:GetEntityAtIndex(repairablePowerPointIndex - 1)
                     
                     //socket power node
-                    repairablePowerPoint:SetInternalPowerState(PowerPoint.kPowerState.destroyed)
+                    //repairablePowerPoint:SetInternalPowerState(PowerPoint.kPowerState.destroyed)
+                    repairablePowerPoint:SocketPowerNode()
                     Print(string.format("Repairable PowerPoint is in %s", repairablePowerPoint:GetLocationName()))
                     
                     //add event listener
@@ -135,12 +136,9 @@ if (Server) then
         local playerIds = team1.playerIds
         
         for _, playerId in ipairs(playerIds) do     
-            
-            Print(string.format("hit palyer %d",playerId))
             local player = Shared.GetEntity(playerId)
             
             if player ~= nil and player:GetId() ~= Entity.invalidId and player:GetIsAlive() then
-                Print(string.format("hide player %d",player:GetId()))
                 //player.gHUDMapEnabled = false
                 player.minimapVisible=false
             end

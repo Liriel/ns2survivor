@@ -13,6 +13,7 @@ Script.Load("lua/Survivor_Shared.lua")
 Script.Load("lua/Survivor_AlienTeam.lua")
 Script.Load("lua/Survivor_MarineTeam.lua")
 //Script.Load("lua/Survivor_PlayingTeam.lua")
+Script.Load("lua/Survivor_Skulk_Server.lua")
 
 local function postServerMsg(player, message)
     local locationId = -1

@@ -4,6 +4,19 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
+local kBioMassTechIds =
+{
+    kTechId.BioMassOne,
+    kTechId.BioMassTwo,
+    kTechId.BioMassThree,
+    kTechId.BioMassFour,
+    kTechId.BioMassFive,
+    kTechId.BioMassSix,
+    kTechId.BioMassSeven,
+    kTechId.BioMassEight,
+    kTechId.BioMassNine
+}
+
 //don't spwan initail structures at game start
 function AlienTeam:SpawnInitialStructures(techPoint) 
     return nil, nil 
@@ -13,6 +26,10 @@ function AlienTeam:GetHasAbilityToRespawn()
     return true 
 end
 
+function AlienTeam:GetBioMassLevel()
+    return 9
+end
+
 local function respawnNow(queuedPlayer)
     //local tps = Shared.GetEntitiesWithClassname("TechPoint")
     local rps = GetAvailableResourcePoints();
@@ -20,31 +37,22 @@ local function respawnNow(queuedPlayer)
     if (table.count(rps) > 0) then
         local resourcePointRandomizer = Randomizer()
         resourcePointRandomizer:randomseed(Shared.GetSystemTime())
-        
         local selectedSpawn = resourcePointRandomizer:random(1, #rps)
-            
-        //local msg = "Techpoints found: %d"
-        //msg = string.format(msg, table.count(tps))
-        //Print (msg)
+        
         local spawnOrigin = Vector(rps[selectedSpawn]:GetOrigin()) + Vector(0.01, 0.2, 0)
         local team = queuedPlayer:GetTeam()
         local success, player = team:ReplaceRespawnPlayer(queuedPlayer, spawnOrigin, queuedPlayer:GetAngles()) 
         //local success, player = team:ReplaceRespawnPlayer(queuedPlayer, nil, nil) 
         
         if (success) then 
+            //give the newborn skulk it's upgrade
+            Print(string.format("Giving upgrades to player %s", player.name))
+            player:GiveUpgrade(kTechId.Leap)
+            player:GiveUpgrade(kTechId.Camouflage)
             DestroyEntity(queuedPlayer)
         end
     end
 end
-
-//can't call GetSortedRespawnQueue from here so the workaroud has to do
---local function respawnAll(team)
---    local alienSpectators = team:GetSortedRespawnQueue()
---    for i = 1, #alienSpectators do
---        local alienSpectator = alienSpectators[i]
---        local success, player = team:ReplaceRespawnPlayer(alienSpectator, nil, nil)
---    end
---end
 
 function AlienTeam:Update(timePassed)
 
@@ -53,6 +61,7 @@ function AlienTeam:Update(timePassed)
     PlayingTeam.Update(self, timePassed)
     
     self:UpdateTeamAutoHeal(timePassed)
+    //self:UnlockTechTree()
     //UpdateEggGeneration(self)
     //UpdateEggCount(self)
     //UpdateAlienSpectators(self)
@@ -72,4 +81,17 @@ function AlienTeam:Update(timePassed)
     
     //UpdateCystConstruction(self, timePassed)
     
+end
+
+function AlienTeam:UnlockTechTree()
+    if self.techTree then
+        local techNode = self.techTree:GetTechNode(kTechId.Leap)
+        if techNode then
+            //Print("tech found")
+            if not(techNode:GetHasTech())then
+                Print("tech enabled")
+                techNode:SetHasTech(true)
+            end
+        end
+    end
 end
