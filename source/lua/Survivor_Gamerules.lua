@@ -80,10 +80,12 @@ if (Server) then
         
         //socket one random power node
         self:DropRandomPowerPoint()
-       
+        
         //turn off the lights
-        for index, entity in ientitylist(powerPoints) do
-            entity:SetLightMode(kLightMode.NoPower)
+        for _, entity in ientitylist(Shared.GetEntitiesWithClassname("PowerPoint")) do
+            if(entity)then
+                entity:SetLightMode(kLightMode.NoPower)
+            end
         end
         
         //play power out sound
@@ -165,18 +167,33 @@ if (Server) then
         repairablePowerPoint:SocketPowerNode()
         Print(string.format("Repairable PowerPoint is in %s", repairablePowerPoint:GetLocationName()))
         
-        //add event listener
+        //add ConstructionComplete event listener
         repairablePowerPoint:GetTeam():AddListener("OnConstructionComplete",function(structure)
             if(structure == repairablePowerPoint) then
                 Print "Repairable PowerPoint constructed!"
                 //turn on the lights
-                for index, entity in ientitylist(powerPoints) do
+                for _, entity in ientitylist(powerPoints) do
                     if(entity ~= repairablePowerPoint) then
                         entity:SetLightMode(kLightMode.Normal)
                     end
                 end 
             end
         end)
+        
+        //add Kill event listener
+        local repairablePowerPoint_OnKill = repairablePowerPoint.OnKill
+        repairablePowerPoint.OnKill = function(self, attacker, doer, point, direction)
+            //turn off the lights
+            for _, entity in ientitylist(powerPoints) do
+                if(entity ~= repairablePowerPoint) then
+                    entity:SetLightMode(kLightMode.NoPower)
+                end
+            end 
+            
+            //call original event handler
+            repairablePowerPoint_OnKill(self, attacker, doer, point, direction)
+        end
+        
     end
    
 end

@@ -18,6 +18,10 @@ function MarineTeam:SpawnInitialStructures(techPoint)
     return nil, nil 
 end
 
+//don't socket the power node by the marines starting techpoing
+function MarineTeam:OnResetComplete()
+end
+
 local function GetArmorLevel(self)
 
     local armorLevels = 0
