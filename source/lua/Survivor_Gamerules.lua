@@ -78,32 +78,8 @@ if (Server) then
         //restore marine health and armor
         self.team1:RestoreTeamHealth()
         
-        //find all power nodes
-        local powerPoints = Shared.GetEntitiesWithClassname("PowerPoint")
-        
-        //randomly select the one that can be repared
-        local powerPointRandomizer = Randomizer()
-        powerPointRandomizer:randomseed(Shared.GetSystemTime()) 
-        local repairablePowerPointIndex = powerPointRandomizer:random(1,powerPoints:GetSize())
-        local repairablePowerPoint = powerPoints:GetEntityAtIndex(repairablePowerPointIndex - 1)
-        
-        //socket power node
-        //repairablePowerPoint:SetInternalPowerState(PowerPoint.kPowerState.destroyed)
-        repairablePowerPoint:SocketPowerNode()
-        Print(string.format("Repairable PowerPoint is in %s", repairablePowerPoint:GetLocationName()))
-        
-        //add event listener
-        repairablePowerPoint:GetTeam():AddListener("OnConstructionComplete",function(structure)
-            if(structure == repairablePowerPoint) then
-                Print "Repairable PowerPoint constructed!"
-                //turn on the lights
-                for index, entity in ientitylist(powerPoints) do
-                    if(entity ~= repairablePowerPoint) then
-                        entity:SetLightMode(kLightMode.Normal)
-                    end
-                end 
-            end
-        end)
+        //socket one random power node
+        self:DropRandomPowerPoint()
        
         //turn off the lights
         for index, entity in ientitylist(powerPoints) do
@@ -172,6 +148,35 @@ if (Server) then
     //simply by calling GiveUpgrade
     function NS2Gamerules:GetAllTech()
         return true
+    end
+    
+    function NS2Gamerules:DropRandomPowerPoint()
+        //find all power nodes
+        local powerPoints = Shared.GetEntitiesWithClassname("PowerPoint")
+        
+        //randomly select the one that can be repared
+        local powerPointRandomizer = Randomizer()
+        powerPointRandomizer:randomseed(Shared.GetSystemTime()) 
+        local repairablePowerPointIndex = powerPointRandomizer:random(1,powerPoints:GetSize())
+        local repairablePowerPoint = powerPoints:GetEntityAtIndex(repairablePowerPointIndex - 1)
+        
+        //socket power node
+        //repairablePowerPoint:SetInternalPowerState(PowerPoint.kPowerState.destroyed)
+        repairablePowerPoint:SocketPowerNode()
+        Print(string.format("Repairable PowerPoint is in %s", repairablePowerPoint:GetLocationName()))
+        
+        //add event listener
+        repairablePowerPoint:GetTeam():AddListener("OnConstructionComplete",function(structure)
+            if(structure == repairablePowerPoint) then
+                Print "Repairable PowerPoint constructed!"
+                //turn on the lights
+                for index, entity in ientitylist(powerPoints) do
+                    if(entity ~= repairablePowerPoint) then
+                        entity:SetLightMode(kLightMode.Normal)
+                    end
+                end 
+            end
+        end)
     end
    
 end

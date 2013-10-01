@@ -29,9 +29,7 @@ local function respawnNow(queuedPlayer)
         
         if (success) then 
             //give the newborn skulk it's upgrade
-            Print(string.format("Giving upgrades to player %s", player.name))
             player:GiveUpgrade(kTechId.Leap)
-            player:GiveUpgrade(kTechId.Camouflage)
             DestroyEntity(queuedPlayer)
         end
     end
