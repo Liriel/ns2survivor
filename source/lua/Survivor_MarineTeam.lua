@@ -5,6 +5,7 @@
 //
 
 local resourcePointRandomizer = Randomizer()
+local supplyDropInterval = 5
 
 local ns2MarineTeamInitialize = MarineTeam.Initialize
 function MarineTeam:Initialize(teamName, teamNumber)
@@ -49,11 +50,6 @@ function MarineTeam:Update(timePassed)
     
     // Update distress beacon mask
     self:UpdateGameMasks(timePassed)    
-
-    //we don't need an infantry portal
-    //if GetGamerules():GetGameStarted() then
-    //    CheckForNoIPs(self)
-    //end
     
     local newArmorLevel = GetArmorLevel(self)
     if self.armorLevel ~= newArmorLevel then
@@ -66,6 +62,45 @@ function MarineTeam:Update(timePassed)
     
     end
     
+    if (Server) and (surviviorGamePhase == kSurvivorGamePhase.Survival) then
+        if (self.lastSupplyDrop == nil) then
+            self.lastSupplyDrop = Shared:GetTime()
+        elseif (self.lastSupplyDrop + supplyDropInterval < Shared:GetTime()) then
+            //drop supplies
+            self:DropSupplies()
+            self.lastSupplyDrop = Shared:GetTime()
+        end
+    end
+    
+end
+
+if Server then
+    function MarineTeam:DropSupplies()
+        local success = false
+        local rps = GetAvailableResourcePoints()
+        
+        //hopefully we found rps
+        assert(table.count(rps) > 0)
+        
+        local selectedSpawn = resourcePointRandomizer:random(1, #rps)
+        local spawnOrigin = rps[selectedSpawn]:GetOrigin() + Vector(0.01, 0.2, 0)
+        //TODO: randomize drop
+        local mapName = LookupTechData(kTechId.AmmoPack, kTechDataMapName)
+
+        if mapName then
+            
+            local droppack = CreateEntity(mapName, spawnOrigin, self:GetTeamNumber())
+            //StartSoundEffectForPlayer(GetDroppackSoundName(techId), self)
+            //self:ProcessSuccessAction(techId)
+            //log message
+            Print(string.format("Supplie dropped in %s", rps[selectedSpawn]:GetLocationName()))
+            
+            success = true
+            
+        end
+
+        return success        
+    end
 end
 
 //TODO: change to power nodes

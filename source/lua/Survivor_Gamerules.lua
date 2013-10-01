@@ -63,6 +63,10 @@ if (Server) then
         surviviorGamePhase = gamePhase
     end
     
+    function NS2Gamerules:GetSurvivorGamePhase()
+        return surviviorGamePhase    
+    end
+    
     function NS2Gamerules:OnStartNotStartedPhase()
     end
     
