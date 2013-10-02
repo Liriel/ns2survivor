@@ -5,7 +5,9 @@
 //
 
 local resourcePointRandomizer = Randomizer()
-local supplyDropInterval = 2
+local supplyDropInterval = 20
+local spawnTechInv = { kTechId.AmmoPack, kTechId.AmmoPack, kTechId.AmmoPack, kTechId.AmmoPack, kTechId.AmmoPack, 
+    kTechId.MedPack, kTechId.MedPack, kTechId.Welder, kTechId.Shotgun }
 
 local ns2MarineTeamInitialize = MarineTeam.Initialize
 function MarineTeam:Initialize(teamName, teamNumber)
@@ -83,28 +85,25 @@ if Server then
         assert(table.count(rps) > 0)
         
         local selectedSpawn = resourcePointRandomizer:random(1, #rps)
-        local offset = (resourcePointRandomizer:random(1,15)/10)
-        local spawnOrigin = rps[selectedSpawn]:GetOrigin() + Vector(offset, 1, offset)
-        //TODO: randomize drop
-        local mapName = LookupTechData(kTechId.AmmoPack, kTechDataMapName)
+        local xOffset = (resourcePointRandomizer:random(1,30) - 15) / 10        
+        local zOffset = (resourcePointRandomizer:random(1,30) - 15) / 10
+        local spawnOrigin = rps[selectedSpawn]:GetOrigin() + Vector(xOffset, 1, zOffset)
+        
+        //get random item index
+        local itemIndex = resourcePointRandomizer:random(1, #spawnTechInv)
+        local mapName = LookupTechData(spawnTechInv[itemIndex], kTechDataMapName)
 
         if mapName then
-            
             local droppack = CreateEntity(mapName, spawnOrigin, self:GetTeamNumber())
-            //StartSoundEffectForPlayer(GetDroppackSoundName(techId), self)
-            //self:ProcessSuccessAction(techId)
             //log message
-            Print(string.format("Supplie dropped in %s", rps[selectedSpawn]:GetLocationName()))
-            
+            Print(string.format("Supply drop: %s in %s", mapName, rps[selectedSpawn]:GetLocationName()))
             success = true
-            
         end
 
         return success        
     end
 end
 
-//TODO: change to power nodes
 function MarineTeam:RespawnPlayer(player, origin, angles)
     local success = false
     local rps = GetAvailableResourcePoints()
