@@ -5,7 +5,7 @@
 //
 
 local resourcePointRandomizer = Randomizer()
-local supplyDropInterval = 5
+local supplyDropInterval = 2
 
 local ns2MarineTeamInitialize = MarineTeam.Initialize
 function MarineTeam:Initialize(teamName, teamNumber)
@@ -83,7 +83,8 @@ if Server then
         assert(table.count(rps) > 0)
         
         local selectedSpawn = resourcePointRandomizer:random(1, #rps)
-        local spawnOrigin = rps[selectedSpawn]:GetOrigin() + Vector(0.01, 0.2, 0)
+        local offset = (resourcePointRandomizer:random(1,15)/10)
+        local spawnOrigin = rps[selectedSpawn]:GetOrigin() + Vector(offset, 1, offset)
         //TODO: randomize drop
         local mapName = LookupTechData(kTechId.AmmoPack, kTechDataMapName)
 

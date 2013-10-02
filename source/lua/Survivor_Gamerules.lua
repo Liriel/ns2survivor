@@ -4,6 +4,9 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
+//dropped items stay pretty long
+kItemStayTime = 300
+
 surviviorGamePhase = kSurvivorGamePhase.NotStarted
 //gHUDMapEnabled = false
 
