@@ -5,8 +5,11 @@
 //
 
 //dropped items stay pretty long
-kItemStayTime = 300
+kItemStayTime = 30
+//round time (default 10 mins)
+kRoundTime = 60--600
 
+survivalStartTime = nil
 surviviorGamePhase = kSurvivorGamePhase.NotStarted
 //gHUDMapEnabled = false
 
@@ -75,11 +78,14 @@ if (Server) then
     
     function NS2Gamerules:OnStartFragYourNeighborPhase()
         local gameRules = GetGamerules()
-        gameRules:SetDamageMultiplier(100)
+        gameRules:SetDamageMultiplier(1000)
         gameRules:ShowMarinesOnMap(false)
     end
     
     function NS2Gamerules:OnStartSurvivalPhase()
+        //start round timer
+        survivalStartTime = Shared.GetTime()
+        
         //reset highdamage
         self:SetDamageMultiplier(1)
         //restore marine health and armor
@@ -134,7 +140,13 @@ if (Server) then
                     self:SetSurvivorGamePhase(kSurvivorGamePhase.NotStarted)
                     self:EndGame(self.team2)
                 end
-                //TODO: check if time is up
+                
+                //check if time is up
+                if (surviviorGamePhase == kSurvivorGamePhase.Survival) and
+                   (Shared.GetTime() > survivalStartTime + kRoundTime) then
+                   self:SetSurvivorGamePhase(kSurvivorGamePhase.NotStarted)
+                   self:EndGame(self.team1)
+                end
             end
         end
     end

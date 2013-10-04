@@ -1,5 +1,6 @@
 name        = "Survivor"
-source_dir  = "source/"
-output_dir  = "output/"
-description = [=[]=]
+source_dir  = "source"
+output_dir  = "output"
+description = [=[bringing the classic game mode from AVP2 to Natural Selection]=]
 image       = "preview.jpg"
+publish_id = "aede0dd"
