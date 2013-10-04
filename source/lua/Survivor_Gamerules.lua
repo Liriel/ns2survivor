@@ -7,7 +7,7 @@
 //dropped items stay pretty long
 kItemStayTime = 30
 //round time (default 10 mins)
-kRoundTime = 60--600
+kRoundTime = 600
 
 survivalStartTime = nil
 surviviorGamePhase = kSurvivorGamePhase.NotStarted
