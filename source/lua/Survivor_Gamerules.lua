@@ -49,6 +49,11 @@ if (Server) then
                     //move on to normal game (phase 2)
                     self:SetSurvivorGamePhase(kSurvivorGamePhase.Survival)
                 end
+                
+                //award some points 
+                if(doer:isa("Player"))then
+                    doer:AddScore(10,0)
+                end
             
                 //move player to alien team
                 success, newEntity = NS2Gamerules.JoinTeam(self, targetEntity, 2)
@@ -83,6 +88,8 @@ if (Server) then
     end
     
     function NS2Gamerules:OnStartSurvivalPhase()
+        //just testing team messaging here
+        //SendTeamMessage(self.team1, kSurvivorTeamMessageTypes.SurvivalStarted)
         //start round timer
         survivalStartTime = Shared.GetTime()
         

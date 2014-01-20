@@ -16,6 +16,9 @@
     <filename>source\lua\Survivor_Globals.lua</filename>
   </file>
   <file>
+    <filename>source\lua\Survivor_Locale.lua</filename>
+  </file>
+  <file>
     <filename>source\lua\Survivor_MapBlip.lua</filename>
   </file>
   <file>
@@ -43,6 +46,12 @@
     <filename>source\lua\Survivor_Team.lua</filename>
   </file>
   <file>
+    <filename>source\lua\Survivor_TeamMessenger.lua</filename>
+  </file>
+  <file>
     <filename>source\lua\Survivor_Utility.lua</filename>
+  </file>
+  <file>
+    <filename>source\gamestrings\Survivor_enUS.lua</filename>
   </file>
 </project>
