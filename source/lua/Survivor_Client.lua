@@ -19,3 +19,6 @@ Script.Load("lua/Survivor_Locale.lua")
 //someone feels the need to implement more langs:
 //local locale = Client.GetOptionString( "locale", "enUS" )
 Script.Load("gamestrings/Survivor_enUS.lua")
+
+//load UI extension
+//Script.Load("lua/Survivor_GUITimer.lua")

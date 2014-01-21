@@ -27,6 +27,11 @@ if (Server) then
         Print "ResetGame called"
        
         ns2ResetGame(self)
+        
+        //reset the round time on the clients
+        if(SendSurvivorSurvivalStartTimeMessage) then
+            SendSurvivorSurvivalStartTimeMessage(0)
+        end
     end
     
     //friendly fire is enabled in the frag your neighbor pahse of the game
@@ -50,10 +55,11 @@ if (Server) then
                     self:SetSurvivorGamePhase(kSurvivorGamePhase.Survival)
                 end
                 
-                //award some points 
-                if(doer:isa("Player"))then
-                    doer:AddScore(10,0)
-                end
+                //TODO: award some points
+                //disabled for now - borks on self kill 
+                --if(doer:isa("Player"))then
+                --    doer:AddScore(10,0)
+                --end
             
                 //move player to alien team
                 success, newEntity = NS2Gamerules.JoinTeam(self, targetEntity, 2)
@@ -72,6 +78,7 @@ if (Server) then
         end
         
         surviviorGamePhase = gamePhase
+        SendSurvivorGamePhaseChangedMessage(gamePhase)
     end
     
     function NS2Gamerules:GetSurvivorGamePhase()
@@ -88,10 +95,10 @@ if (Server) then
     end
     
     function NS2Gamerules:OnStartSurvivalPhase()
-        //just testing team messaging here
-        //SendTeamMessage(self.team1, kSurvivorTeamMessageTypes.SurvivalStarted)
         //start round timer
         survivalStartTime = Shared.GetTime()
+        //send the survival phase starting timestamp to the clients
+        SendSurvivorSurvivalStartTimeMessage(survivalStartTime)
         
         //reset highdamage
         self:SetDamageMultiplier(1)
