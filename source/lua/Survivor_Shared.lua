@@ -5,8 +5,9 @@
 Script.Load("lua/HelloUnknownWorld.lua")
 
 //load the class hooking utilities by fsfod
-//Script.Load("lua/ClassHooker.lua")
-//Script.Load("lua/LoadTracker.lua")
+--Script.Load("lua/PathUtil.lua")
+--Script.Load("lua/ClassHooker.lua")
+--Script.Load("lua/LoadTracker.lua")
 
 Script.Load("lua/Survivor_Globals.lua")
 Script.Load("lua/Survivor_Gamerules.lua")

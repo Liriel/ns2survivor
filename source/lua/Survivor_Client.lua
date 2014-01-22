@@ -21,4 +21,4 @@ Script.Load("lua/Survivor_Locale.lua")
 Script.Load("gamestrings/Survivor_enUS.lua")
 
 //load UI extension
-//Script.Load("lua/Survivor_GUITimer.lua")
+--Script.Load("lua/Survivor_GUIMarineHud.lua")

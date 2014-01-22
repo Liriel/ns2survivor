@@ -4,16 +4,25 @@
     <filename>source\lua\ClassHooker.lua</filename>
   </file>
   <file>
+    <filename>source\lua\DispatchBuilder.lua</filename>
+  </file>
+  <file>
     <filename>source\lua\HelloUnknownWorld.lua</filename>
   </file>
   <file>
     <filename>source\lua\LoadTracker.lua</filename>
   </file>
   <file>
+    <filename>source\lua\PathUtil.lua</filename>
+  </file>
+  <file>
     <filename>source\lua\Survivor_AlienTeam.lua</filename>
   </file>
   <file>
     <filename>source\lua\Survivor_Client.lua</filename>
+  </file>
+  <file>
+    <filename>source\lua\Survivor_GUIMarineHud.lua</filename>
   </file>
   <file>
     <filename>source\lua\Survivor_GUITimer.lua</filename>

@@ -8,6 +8,8 @@
 kItemStayTime = 30
 //round time (default 10 mins)
 kRoundTime = 600
+//do not send the no commander message the entire round
+kSendNoCommanderMessageRate = kRoundTime + 1
 
 survivalStartTime = nil
 surviviorGamePhase = kSurvivorGamePhase.NotStarted
