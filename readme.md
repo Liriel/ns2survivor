@@ -18,14 +18,11 @@ Survival
 Now the Marines need to work together and try to survive as long as possible scoring ponits every now and then.
 
 Features
-===============
+-----------
 her's whats implemented so far:
-*  Basic game mechanics: FRAG YOUR NEIGHBOUR and Survival Phase
-*  Random supply drops for the Marine Team
-*  Random power node socketed to reativate the lights
-*  Random Spawn
-
-Todo
-===============
-*  Scoring persistant over all rounds on a single map
-*  Balance/Playtests
+[x]  Basic game mechanics: FRAG YOUR NEIGHBOUR and Survival Phase
+[x]  Random supply drops for the Marine Team
+[x]  Random power node socketed to reativate the lights
+[x]  Random Spawn
+[]  Scoring persistant over all rounds on a single map
+[]  Balance/Playtests
