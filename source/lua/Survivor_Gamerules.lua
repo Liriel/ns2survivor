@@ -230,5 +230,19 @@ if (Server) then
         end
         
     end
+
+		local ns2OnUpdate=NS2Gamerules.OnUpdate
+    function NS2Gamerules:OnUpdate(timePassed)
+			  //disable NO COMMANDER nagging by resetting the last checked field for both teams before calling 
+				//the original Update function
+				if(self.noCommanderStartTime) then
+				    self.noCommanderStartTime["MarineCommander"] = nil
+				    self.noCommanderStartTime["AlienCommander"] = nil
+				end
+
+				//call original function
+				ns2OnUpdate(self, timePassed)
+		end
+		
    
 end

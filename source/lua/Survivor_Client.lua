@@ -4,6 +4,13 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
+
+//load the class hooking utilities by fsfod
+Script.Load("lua/PreLoadMod.lua")
+Script.Load("lua/PathUtil.lua")
+Script.Load("lua/ClassHooker.lua")
+Script.Load("lua/LoadTracker.lua")
+
 // RandomizeAliensClient.lua
 Script.Load("lua/Client.lua")
 Print "Client VM"
@@ -21,4 +28,4 @@ Script.Load("lua/Survivor_Locale.lua")
 Script.Load("gamestrings/Survivor_enUS.lua")
 
 //load UI extension
---Script.Load("lua/Survivor_GUIMarineHud.lua")
+Script.Load("lua/Survivor_GUIMarineHud.lua")

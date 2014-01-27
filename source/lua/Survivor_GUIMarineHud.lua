@@ -24,7 +24,7 @@ end
 function SurvivorGUIMarineHud:Update_Hook(self, deltaTime)
 
 	self.commanderName:DestroyAnimation("COMM_TEXT_WRITE")
-	self.commanderName:SetText("COMBAT MODE")
+	self.commanderName:SetText("SURVIVOR")
 	self.commanderName:SetColor(GUIMarineHUD.kActiveCommanderColor)
 
 end
