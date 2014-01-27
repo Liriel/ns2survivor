@@ -20,9 +20,9 @@ Now the Marines need to work together and try to survive as long as possible sco
 Features
 -----------
 her's whats implemented so far:
-[x]  Basic game mechanics: FRAG YOUR NEIGHBOUR and Survival Phase
-[x]  Random supply drops for the Marine Team
-[x]  Random power node socketed to reativate the lights
-[x]  Random Spawn
-[]  Scoring persistant over all rounds on a single map
-[]  Balance/Playtests
+-[x]  Basic game mechanics: FRAG YOUR NEIGHBOUR and Survival Phase
+-[x]  Random supply drops for the Marine Team
+-[x]  Random power node socketed to reativate the lights
+-[x]  Random Spawn
+-[]  Scoring persistant over all rounds on a single map
+-[]  Balance/Playtests
