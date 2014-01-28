@@ -11,6 +11,9 @@ kRoundTime = 600
 //do not send the no commander message the entire round
 kSendNoCommanderMessageRate = kRoundTime + 1
 
+//set friendly fire factor to 100%
+kFriendlyFireScalar = 1
+
 survivalStartTime = nil
 surviviorGamePhase = kSurvivorGamePhase.NotStarted
 //gHUDMapEnabled = false
@@ -92,7 +95,6 @@ if (Server) then
     
     function NS2Gamerules:OnStartFragYourNeighborPhase()
         local gameRules = GetGamerules()
-        gameRules:SetDamageMultiplier(1000)
         gameRules:ShowMarinesOnMap(false)
     end
     
@@ -102,8 +104,6 @@ if (Server) then
         //send the survival phase starting timestamp to the clients
         SendSurvivorSurvivalStartTimeMessage(survivalStartTime)
         
-        //reset highdamage
-        self:SetDamageMultiplier(1)
         //restore marine health and armor
         self.team1:RestoreTeamHealth()
         
