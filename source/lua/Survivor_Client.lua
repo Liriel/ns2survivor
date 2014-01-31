@@ -4,7 +4,6 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
-
 //load the class hooking utilities by fsfod
 Script.Load("lua/PreLoadMod.lua")
 Script.Load("lua/PathUtil.lua")

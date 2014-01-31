@@ -4,6 +4,16 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
+//load the class hooking utilities by fsfod
+//BEFORE loading the base NS2 server
+//Script.Load("lua/PreLoadMod.lua")
+//Script.Load("lua/PathUtil.lua")
+//Script.Load("lua/ClassHooker.lua")
+//Script.Load("lua/LoadTracker.lua")
+
+//load mixin & player hooks
+//Script.Load("lua/Survivor_PlayerHooks.lua")
+
 // RandomizeAliensServer.lua
 Script.Load("lua/Server.lua")
 Print "Server VM"
@@ -14,6 +24,9 @@ Script.Load("lua/Survivor_Team.lua")
 Script.Load("lua/Survivor_AlienTeam.lua")
 Script.Load("lua/Survivor_MarineTeam.lua")
 Script.Load("lua/Survivor_Skulk_Server.lua")
+
+//mixin override
+Script.Load("lua/Survivor_PointGiverMixin.lua")
 
 local function postServerMsg(player, message)
     local locationId = -1

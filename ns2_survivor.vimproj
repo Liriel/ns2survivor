@@ -19,6 +19,8 @@ NS2 Survivor="C:\DEV\Ns2Survivor" CD="." filter="*.md"{
    Survivor_MarineTeam.lua
    Survivor_NetworkMessages.lua
    Survivor_NetworkMessages_Client.lua
+   Survivor_PlayerHooks.lua
+   Survivor_PointGiverMixin.lua
    Survivor_PowerPointLightHandler.lua
    Survivor_Predict.lua
    Survivor_Server.lua
@@ -28,7 +30,6 @@ NS2 Survivor="C:\DEV\Ns2Survivor" CD="." filter="*.md"{
    Survivor_TeamMessenger.lua
    Survivor_Utility.lua
     }
-
  }
   readme.md
 }

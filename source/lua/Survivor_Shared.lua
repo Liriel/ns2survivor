@@ -4,7 +4,6 @@
 //
 Script.Load("lua/HelloUnknownWorld.lua")
 
-
 Script.Load("lua/Survivor_Globals.lua")
 Script.Load("lua/Survivor_Gamerules.lua")
 Script.Load("lua/Survivor_MapBlip.lua")
@@ -13,4 +12,3 @@ Script.Load("lua/Survivor_MapBlip.lua")
 
 // register some network messages
 Script.Load("lua/Survivor_NetworkMessages.lua")
-
