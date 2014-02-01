@@ -4,6 +4,7 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
+//TODO: just for reference -> THIS FILE IS NOT LOADED RIGHT NOW!
 local HotReload = SurvivorPlayer
 if(not HotReload) then
   SurvivorPlayer = SurvivorPlayer or {}

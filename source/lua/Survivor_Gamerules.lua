@@ -11,6 +11,13 @@ kRoundTime = 600
 //do not send the no commander message the entire round
 kSendNoCommanderMessageRate = kRoundTime + 1
 
+//increase the points given for constructing the power node
+kBuildPointValue = 10
+//number of seconds a marine has to survive to score one point
+kSurvivalSecondsPerPoint = 5
+//dont give away PRes for frags
+kPersonalResPerKill = 0
+
 //set friendly fire factor to 100%
 kFriendlyFireScalar = 1
 

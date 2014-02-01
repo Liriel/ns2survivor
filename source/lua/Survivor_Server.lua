@@ -6,6 +6,7 @@
 
 //load the class hooking utilities by fsfod
 //BEFORE loading the base NS2 server
+//TODO: just for reference now - uncomment if there is something to hook on the server side
 //Script.Load("lua/PreLoadMod.lua")
 //Script.Load("lua/PathUtil.lua")
 //Script.Load("lua/ClassHooker.lua")
