@@ -60,6 +60,7 @@ if (Server) then
         //check if the killed entity was a marine
         if (targetEntity:isa("Player")) then
             if (targetEntity:GetTeamNumber() == 1) then
+
                 //If the marine was the first one to get killed goto phase two:Survive!
                 //this disables friendly fire
                 if (surviviorGamePhase == kSurvivorGamePhase.FragYourNeighbor) then
@@ -67,14 +68,7 @@ if (Server) then
                     self:SetSurvivorGamePhase(kSurvivorGamePhase.Survival)
                 end
                 
-                //TODO: award some points
-                //disabled for now - borks on self kill 
-                --if(doer:isa("Player"))then
-                --    doer:AddScore(10,0)
-                --end
-            
-                //move player to alien team
-                //success, newEntity = NS2Gamerules.JoinTeam(self, targetEntity, 2)
+								//TODO: send "Player has muted" message to clients
             end
         end
     end

@@ -4,15 +4,18 @@
 //    Created by:   Lassi lassi@heisl.org
 //
 
-//load the class hooking utilities by fsfod
-//BEFORE loading the base NS2 server
-Script.Load("lua/PreLoadMod.lua")
-Script.Load("lua/PathUtil.lua")
-Script.Load("lua/ClassHooker.lua")
-Script.Load("lua/LoadTracker.lua")
+//currently there are no server hooks so we don't need to load the framework here
+//TODO: use it or remove it
 
-//load mixin & player hooks
-Script.Load("lua/Survivor_PlayerHooks.lua")
+////load the class hooking utilities by fsfod
+//BEFORE loading the base NS2 server
+//Script.Load("lua/PreLoadMod.lua")
+//Script.Load("lua/PathUtil.lua")
+//Script.Load("lua/ClassHooker.lua")
+//Script.Load("lua/LoadTracker.lua")
+//
+////load mixin & player hooks
+//Script.Load("lua/Survivor_PlayerHooks.lua")
 
 // RandomizeAliensServer.lua
 Script.Load("lua/Server.lua")

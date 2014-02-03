@@ -73,6 +73,13 @@ function MarineTeam:Update(timePassed)
             self.lastSupplyDrop = Shared:GetTime()
         end
     end
+
+		//marines don't respawn - they become alines
+		//this fixes #3
+    //https://github.com/Liriel/ns2survivor/issues/9
+    for index, queuedPlayer in ipairs(self:GetSortedRespawnQueue()) do
+			GetGamerules():JoinTeam(queuedPlayer, kTeam2Index)
+    end
     
 end
 
