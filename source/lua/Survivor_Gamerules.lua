@@ -74,7 +74,7 @@ if (Server) then
                 --end
             
                 //move player to alien team
-                success, newEntity = NS2Gamerules.JoinTeam(self, targetEntity, 2)
+                //success, newEntity = NS2Gamerules.JoinTeam(self, targetEntity, 2)
             end
         end
     end
