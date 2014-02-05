@@ -64,11 +64,15 @@ if (Server) then
                 //If the marine was the first one to get killed goto phase two:Survive!
                 //this disables friendly fire
                 if (surviviorGamePhase == kSurvivorGamePhase.FragYourNeighbor) then
-                    //move on to normal game (phase 2)
-                    self:SetSurvivorGamePhase(kSurvivorGamePhase.Survival)
+                  //move on to normal game (phase 2)
+                  self:SetSurvivorGamePhase(kSurvivorGamePhase.Survival)
+
+								elseif (surviviorGamePhase == kSurvivorGamePhase.Survival) then
+								  //send "Player has muted" message to clients
+				          SendSurvivorTeamMessage(self.team1, kSurvivorTeamMessageTypes.PlayerMutated, targetEntity:GetId())
+
                 end
                 
-								//TODO: send "Player has muted" message to clients
             end
         end
     end
@@ -100,6 +104,8 @@ if (Server) then
     end
     
     function NS2Gamerules:OnStartSurvivalPhase()
+			  //Notify the players that it's time to survive
+				SendSurvivorTeamMessage(self.team1, kSurvivorTeamMessageTypes.SurvivalStarted)
         //start round timer
         survivalStartTime = Shared.GetTime()
         //send the survival phase starting timestamp to the clients

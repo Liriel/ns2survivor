@@ -1,6 +1,6 @@
 NS2 Survivor="C:\DEV\Ns2Survivor" CD="." filter="*.md"{
   source=source" CD="." {
-    gamestrings="gamestrings"{
+    gamestrings="gamestrings" CD="."{
     }
     lua="lua" CD=. filter="*.lua"{
    ClassHooker.lua
