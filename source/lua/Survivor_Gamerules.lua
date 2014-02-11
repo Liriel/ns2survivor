@@ -25,6 +25,8 @@ survivalStartTime = nil
 surviviorGamePhase = kSurvivorGamePhase.NotStarted
 //gHUDMapEnabled = false
 
+local kTimeToReadyRoom = 8
+
 if (Server) then
     //if the survivor pahse of the the game has started already players have to wait 
     //until a new round begins
@@ -250,6 +252,32 @@ if (Server) then
 				//call original function
 				ns2OnUpdate(self, timePassed)
 		end
+	
+		//since this function overrides the original implementation we can't change
+		//the name although we dont update to ready room at all...
+    function NS2Gamerules:UpdateToReadyRoom()
+
+        local state = self:GetGameState()
+        if(state == kGameState.Team1Won or state == kGameState.Team2Won or state == kGameState.Draw) then
+        
+            if self.timeSinceGameStateChanged >= kTimeToReadyRoom then
+            
+                // since we want the game to restart immediatly 
+								// we move all the player straigt back into the marine team
+                local function SetReadyRoomTeam(player)
+                    player:SetCameraDistance(0)
+                    self:JoinTeam(player, kTeam1Index)
+                end
+                Server.ForAllPlayers(SetReadyRoomTeam)
+
+                // Spawn them there and reset teams
+                self:ResetGame()
+
+            end
+            
+        end
+        
+    end
 		
    
 end
