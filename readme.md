@@ -24,5 +24,5 @@ her's whats implemented so far:
 - [x] Random supply drops for the Marine Team
 - [x] Random power node socketed to reativate the lights
 - [x] Random Spawn
-- [ ] Scoring persistant over all rounds on a single map
+- [x] Scoring persistant over all rounds on a single map
 - [ ] Balance/Playtests
