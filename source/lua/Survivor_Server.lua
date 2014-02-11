@@ -28,8 +28,9 @@ Script.Load("lua/Survivor_AlienTeam.lua")
 Script.Load("lua/Survivor_MarineTeam.lua")
 Script.Load("lua/Survivor_Skulk_Server.lua")
 
-//mixin override
+//mixin overrides
 Script.Load("lua/Survivor_PointGiverMixin.lua")
+Script.Load("lua/Survivor_ScoringMixin.lua")
 
 local function postServerMsg(player, message)
     local locationId = -1

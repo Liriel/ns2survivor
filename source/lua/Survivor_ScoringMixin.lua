@@ -6,6 +6,7 @@ function ScoringMixin:ResetScores()
 	if not self:isa("Player") then
     self.score = 0
   end
+
   self.kills = 0
   self.assistkills = 0
   self.deaths = 0    
