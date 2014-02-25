@@ -46,6 +46,8 @@ if (Server) then
         if(SendSurvivorSurvivalStartTimeMessage) then
             SendSurvivorSurvivalStartTimeMessage(0)
         end
+
+        self:ShowMarinesOnMap(false)
     end
     
     //friendly fire is enabled in the frag your neighbor pahse of the game
@@ -101,11 +103,11 @@ if (Server) then
     end
     
     function NS2Gamerules:OnStartFragYourNeighborPhase()
-        local gameRules = GetGamerules()
-        gameRules:ShowMarinesOnMap(false)
     end
     
     function NS2Gamerules:OnStartSurvivalPhase()
+			  //re-enable minimap
+        self:ShowMarinesOnMap(true)
 			  //Notify the players that it's time to survive
 				SendSurvivorTeamMessage(self.team1, kSurvivorTeamMessageTypes.SurvivalStarted)
         //start round timer
@@ -148,6 +150,7 @@ if (Server) then
         end
                 //start the game already!
         if self:GetGameState() == kGameState.NotStarted then
+            self.countdownTime = 1
             self:SetGameState(kGameState.PreGame)
             self:SetSurvivorGamePhase(kSurvivorGamePhase.FragYourNeighbor)
         end
@@ -184,8 +187,15 @@ if (Server) then
             local player = Shared.GetEntity(playerId)
             
             if player ~= nil and player:GetId() ~= Entity.invalidId and player:GetIsAlive() then
-                //player.gHUDMapEnabled = false
-                player.minimapVisible=false
+							  if show then
+									player:UpdateClientRelevancyMask()
+								else
+ 					        local client = Server.GetOwner(player)
+ 					        // client may be nil if the server is shutting down.
+ 					        if client then
+ 					            client:SetRelevancyMask(kRelevantToReadyRoom)
+ 					        end
+							  end	
             end
         end
     end
@@ -239,7 +249,7 @@ if (Server) then
         end
         
     end
-
+		
 		local ns2OnUpdate=NS2Gamerules.OnUpdate
     function NS2Gamerules:OnUpdate(timePassed)
 			  //disable NO COMMANDER nagging by resetting the last checked field for both teams before calling 

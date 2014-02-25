@@ -1,4 +1,4 @@
-NS2 Survivor="C:\DEV\Ns2Survivor" CD="." filter="*.md"{
+NS2 Survivor="F:\DEV\ns2_survivor" CD="." filter="*.md"{
   source=source" CD="." {
     gamestrings="gamestrings" CD="."{
     }
@@ -23,6 +23,7 @@ NS2 Survivor="C:\DEV\Ns2Survivor" CD="." filter="*.md"{
    Survivor_PointGiverMixin.lua
    Survivor_PowerPointLightHandler.lua
    Survivor_Predict.lua
+   Survivor_ScoringMixin.lua
    Survivor_Server.lua
    Survivor_Shared.lua
    Survivor_Skulk_Server.lua

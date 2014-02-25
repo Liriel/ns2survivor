@@ -13,3 +13,4 @@ Script.Load("lua/Survivor_MapBlip.lua")
 // register some network messages
 Script.Load("lua/Survivor_NetworkMessages.lua")
 Script.Load("lua/Survivor_TeamMessenger.lua")
+
